@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hexlet/chat-server": "^2.0.4",
-    "formik": "^2.4.6",
-    "react-router-dom": "^6.26.1"
+    "@hexlet/chat-server": "^2.0.4"
   }
 }
