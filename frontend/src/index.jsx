@@ -4,14 +4,16 @@ import './style.css';
 import SignupForm from './Forms/SignupForm';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './errorPage';
-import Root from './routes/root';
 import LogInForm from './Forms/LogInForm';
+import Chat from './Chat';
+
+
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LogInForm />,
+    element: <Chat />,
     errorElement: <ErrorPage />,
   },
   {
@@ -29,6 +31,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );

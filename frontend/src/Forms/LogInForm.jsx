@@ -1,17 +1,20 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LogInForm = () => {
-  
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
       repeatPassword: '',
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      const responce = await axios.post('/api/v1/login', {username: values.email, password: values.password});
+      localStorage.setItem('token', responce.data.token);
+      navigate('/')
     },
   });
   return (
@@ -20,7 +23,7 @@ const LogInForm = () => {
       <input
         id="email"
         name="email"
-        type="email"
+        type="text"
         onChange={formik.handleChange}
         value={formik.values.email}
       />
