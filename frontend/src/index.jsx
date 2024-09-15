@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.css';
 import SignupForm from './Forms/SignupForm';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './errorPage';
 import LogInForm from './Forms/LogInForm';
-import Chat from './Chat';
+import Chats from './Chats.jsx';
+import store from './slices/index.js';
+import { Provider } from 'react-redux';
 
 
 
@@ -13,12 +15,12 @@ import Chat from './Chat';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Chat />,
+    element: <Chats />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/signup',
-    element: <SignupForm/>
+    element: <SignupForm />
   },
   {
     path: '/login',
@@ -26,11 +28,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
 ])
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider >
   </React.StrictMode>
 );

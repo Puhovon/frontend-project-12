@@ -1,2 +1,7 @@
 build:
+	cd fronted/
 	npm run build
+start:
+	npx start-server
+	cd fronted/
+	npm run start

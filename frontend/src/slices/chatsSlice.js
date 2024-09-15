@@ -5,8 +5,13 @@ const fetchData = createAsyncThunk(
     'chatsSlice/fetchData',
     async (authHeader, { rejectWithValue }) => {
         try {
-            axios.get('/api/v1/channels', { Authorization: `Bearer ${authHeader}`, }).then((r) => console.log(r.data));
-        } catch (error) {
+            console.log(authHeader);
+            const data = await axios.get('/api/v1/channels', {headers:{ Authorization: `Bearer ${authHeader}`, }}).then((r) => {
+                console.log(r.data)
+            });
+            return data;
+
+        } catch (err) {
             rejectWithValue({ message: err.message, status: err.status });
         }
 
@@ -21,7 +26,7 @@ const slice = createSlice({
         builder.addCase(fetchData.fulfilled, (state, { payload }) => {
             state.loading = true;
             state.channels = payload;
-            state.currentChanelId = payload.currentChanelId;
+            console.log(payload)
         }).addCase(fetchData.pending, (state) => {
             state.loading = true;
         }).addCase(fetchData.rejected, (state) => {
@@ -30,6 +35,6 @@ const slice = createSlice({
     }
 })
 
-const actions = {...slice.actions, fetchData};
-export {actions};
+const actions = { ...slice.actions, fetchData };
+export { actions };
 export default slice.reducer;
